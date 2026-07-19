@@ -11,7 +11,7 @@ def homeview(request):
 
 
 
-  bloglogs=Myblog.objects.all()
+  bloglogs=Myblog.objects.all().order_by("-created_at")
   
 
   return render(request,"components/Home.html",{
@@ -34,3 +34,51 @@ def create_Myblog(request):
    print("Myblog created sucess")
    
   return redirect("home_url")
+
+def blog_view(request , id):
+  blog=Myblog.objects.get(pk=id)
+  return  render(request,"components/Blogs.html",{
+   "blog":blog 
+  })
+
+def delete_view(request ,id ):
+  blog=Myblog.objects.get(pk=id)
+  return  render(request,"components/Deletepage.html",{
+   "blog":blog 
+  })
+  
+def delete_view_blog(request):
+  blog_id=request.POST.get("delet_blog")
+  Myblog.objects.get(pk=blog_id).delete()
+  return redirect("home_url")
+
+
+def update_view(request ,id ):
+  blog=Myblog.objects.get(pk=id)
+  return  render(request,"components/update.html",{
+   "blog":blog 
+  })
+
+
+def update_Myblog(request ,id):
+ 
+  
+  try:
+    blog=Myblog.objects.get(pk=id)
+    updated_title=request.POST.get("title")
+    updated_caption=request.POST.get("updateblog")
+    
+    blog.title=updated_title
+    blog.caption=updated_caption
+    blog.save()
+     
+   
+    
+  except Exception as e:
+   print("Myblog not created",e)
+   
+  else:
+   print("Myblog updated sucess")
+   
+  return redirect("home_url")
+

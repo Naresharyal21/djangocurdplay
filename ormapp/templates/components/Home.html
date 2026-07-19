@@ -9,38 +9,44 @@
 </head>
 
 <body>
-  <div class="bg-purple-400 h-16 mt-8 ml-8 pt-4 w-[70%] pl-[35%]">post list</div>
-  <div class="flex ml-8 p-2 w-[70%] bg-green-500 border rounded justify-around items-center">Add  a new posts
+  <div class="bg-purple-400 font-bold text-xl h-16 mt-8 ml-8 pt-4 w-[70%] pl-[35%]">My Blogs</div>
+  <div class="flex ml-8 p-2 w-[70%] bg-green-500 border rounded justify-around items-center">Add a new posts
     <form method="POST" action="{% url 'create_post_url' %}">
       {% csrf_token %}
 
       <div class="h-12 ">
-        <input type="text" name="title" placeholder="Enter the title of the Blog" class="h-12 mt-8  p-1 w-[100%] bg-blue-200 rounded ">
+        <input type="text" name="title" placeholder="Enter the title of the Blog"
+          class="h-12 mt-8  p-1 w-[100%] bg-blue-200 rounded ">
       </div>
       <div class="h-32 ">
-        <input type="text" name="caption" placeholder="Enter ypur post contents" class="h-16 mt-8  p-1 w-[100%] rounded ">
+        <input type="text" name="caption" placeholder="Enter ypur post contents"
+          class="h-16 mt-8  p-1 w-[100%] rounded ">
       </div>
       <button type=submit class="h-16 p-1 w-26 bg-blue-500 rounded">submit posts</button>
-    </div>
+  </div>
   </form>
-  <div class="flex justify-between h-[400px] w-[70%] bg-green-200 ml-8 ">
+  <div class="flex flex-col h-[400px] w-[70%] bg-green-200 ml-8 ">
 
 
     {% for post in bloglogs %}
-      
-    <div class=" flex flex-col w-[100%] h-64 m-4  mt-12 border border-red-400  justify-center justify-between ">
-     
+
+    <div class=" flex flex-col w-[100%] h-64  mt-12 border border-red-400  justify-center justify-between ">
+
       <div class="w-[100%] pl-2 items bg-red-200">
         {{ post.title }}
 
       </div>
 
       <div class="w-[100%] pl-2 items bg-blue-200">
-        {{ post.caption }}
-
+        {{ post.caption|truncatechars:50 }}
+        <br>
+        <a class="bg-green-500 rounded p-1 ml-[80%]" href="{% url 'blog_view_url' post.id %}">Read more </a>
+       
+      
       </div>
       <div class="w-[100%] pl-2 items bg-red-200">
-        {{ post.created_at }}
+        created:{{ post.created_at }}
+        updated:{{ post.updated_at }}
 
       </div>
       {% comment %} <div class="w-[100%] pl-2 items bg-red-200">
@@ -52,8 +58,8 @@
 
       </div> {% endcomment %}
       {% comment %} <div class="w-[100%] pl-2 items  flex justify-around">
-       <button class=" bg-blue-500 p-1 border border-black rounded">+likes</button>
-       <button class=" bg-red-500 p-1 border border-black rounded">-likes</button>
+        <button class=" bg-blue-500 p-1 border border-black rounded">+likes</button>
+        <button class=" bg-red-500 p-1 border border-black rounded">-likes</button>
 
       </div> {% endcomment %}
 

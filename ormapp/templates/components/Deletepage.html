@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>conform delete</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-blue-100 flex flex-col items-center justify-center">
+  <div class="flex  mt-16 pb-8 flex-col bg-red-100 rounded w-[50%]  items-center ">
+    <div class="pl-5">
+
+      <p class="font-bold text-red-500 mt-4">Are you sure to delet this blog!</p>
+
+    </div>
+    <div class=" p-5 font-bold">
+
+      {{ blog.title }} <br>
+
+    </div>
+
+  </div>
+  <div class="wrapper flex items-center justify-center mt-8">
+
+    <a class="rounded bg-blue-200 p-2  " href="{% url 'home_url' %}">Return </a>
+
+    <form action="{% url 'conform_delete_blog_url' %}" method="POST">
+      {% csrf_token %}
+      <input type="hidden" name="delet_blog" value="{{ blog.id}}">
+
+      <button type="submit" class="justify-between bg-red-400 rounded ml-8 p-1"> Yes Delete</button>
+    </form>
+  </div>
+</body>
+
+</html>
