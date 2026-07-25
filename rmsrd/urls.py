@@ -5,4 +5,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("curd/", include("curd.urls")),
     path("ormapp/",include("ormapp.urls")),
+    path("secondcurd/",include("secondcurd.urls"))
 ]

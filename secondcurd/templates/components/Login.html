@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <title>Document</title>
+</head>
+
+<body class="flex  bg-red-200 justify-center items-center h-screen  ">
+
+
+
+  <form method="POST" action="{% url 'signin_view_url'  %}">
+    {% csrf_token %}
+
+    <div class="h-[40vh]  w-[40vh] flex  flex-col bg-white rounded justify-center items-center  ">
+
+
+
+
+
+      <input class="mt-8  p-2 border  border-black-400 rounded" type="email" name="useremail"
+        placeholder="Enter your Email" />
+
+      <input class="mt-8  p-2 border  border-black-400 rounded" type="password" name="userpassword"
+        placeholder="Enter your password" />
+
+
+ 
+
+<div class="flex">
+
+  
+  <button class="mt-[18px] hover:bg-green-200 rounded p-2" type="submit">Sign in </button>
+  
+  
+  <a href="{% url 'signup_view_url' %}" class="mt-[18px] hover:bg-green-200 rounded p-2" >Sign up </a>
+  
+</div>
+    </div>
+
+  </form>
+ 
+</body>
+
+</html>
